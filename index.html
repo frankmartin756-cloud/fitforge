@@ -175,7 +175,7 @@
   <h1>Forge Your <em>Best Body</em> in 90 Days</h1>
   <p class="hero-sub">AI-powered workouts, nutrition tracking, and real coach support — personalized for your body, your schedule, your goals.</p>
   <div class="hero-cta-group">
-    <button class="btn-primary" onclick="openModal('free')">Get Started — $19/mo →</button>
+    <button class="btn-primary" onclick="openModal('pro')">Get Started — $19/mo →</button>
     <a href="#how" class="btn-secondary">See How It Works</a>
   </div>
   <div class="hero-stats">
@@ -242,9 +242,9 @@
     <!-- FREE TRIAL -->
     <div class="pricing-card popular">
       <div class="popular-badge">Most Popular</div>
-      <div class="plan-name">FitForge Pro</div>
-      <div class="plan-price"><span>$</span>0</div>
-      <div class="plan-period">$19/month · Cancel anytime</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price"><span>$</span>19</div>
+      <div class="plan-period">per month · Cancel anytime</div>
       <ul class="plan-features">
         <li>Full access from day one</li>
         <li>AI-personalized workouts</li>
@@ -253,24 +253,10 @@
         <li>Billed $19/month · Cancel anytime</li>
         <li>No contracts — cancel anytime</li>
       </ul>
-      <button class="plan-btn plan-btn-dark" onclick="openModal('free')">Get Started — $19/mo →</button>
+      <button class="plan-btn plan-btn-dark" onclick="openModal('pro')">Get Started — $19/mo →</button>
     </div>
 
-    <!-- PRO -->
-    <div class="pricing-card">
-      <div class="plan-name">Pro</div>
-      <div class="plan-price"><span>$</span>19</div>
-      <div class="plan-period">per month</div>
-      <ul class="plan-features">
-        <li>Unlimited workouts</li>
-        <li>AI-personalized programs</li>
-        <li>Full nutrition engine</li>
-        <li>Progress analytics</li>
-        <li>Community challenges</li>
-        <li class="no">Dedicated coach</li>
-      </ul>
-      <button class="plan-btn plan-btn-outline" onclick="openModal('pro')">Get Pro — $19/mo</button>
-    </div>
+
 
     <!-- ELITE -->
     <div class="pricing-card">
@@ -310,7 +296,7 @@
   <div class="section-label">Ready?</div>
   <h2 class="section-title">Your transformation starts <em style="color:var(--lime);font-style:normal;">today.</em></h2>
   <p>Join 500,000+ people who stopped making excuses and started making progress. Join today and get full access from day one.</p>
-  <button class="btn-primary" style="font-size:1.1rem; padding: 1.1rem 3rem;" onclick="openModal('free')">Get Started — $19/mo →</button>
+  <button class="btn-primary" style="font-size:1.1rem; padding: 1.1rem 3rem;" onclick="openModal('pro')">Get Started — $19/mo →</button>
 </section>
 
 <footer>
@@ -425,28 +411,16 @@
 </div>
 
 <script>
-  // Which square link to use
+  // Square links
   const squareLinks = {
-    free: 'https://square.link/u/TdWS5WjG',
-    pro:  'https://square.link/u/TdWS5WjG',
-    elite:'https://square.link/u/rcIYCdKW'
+    pro:   'https://square.link/u/TdWS5WjG',
+    elite: 'https://square.link/u/rcIYCdKW'
   };
-  let currentPlan = 'free';
+  let currentPlan = 'pro';
 
   function openModal(plan) {
     currentPlan = plan;
-    const titles = { free: 'Start Your FitForge Pro', pro: 'Get FitForge Pro', elite: 'Get FitForge Elite' };
-    const subs   = { free: 'Full Pro access $19 charged today · Then $19/mo · Cancel anytime', pro: 'Full access · $19/month · Cancel anytime', elite: 'Everything + dedicated coach · $49/month · Cancel anytime' };
-    const amounts = { free: '$19.00', pro: '$19.00', elite: '$49.00' };
-    document.getElementById('modalTitle').textContent = titles[plan];
-    document.getElementById('modalSub').textContent = subs[plan];
-    document.getElementById('autoAmount').textContent = amounts[plan];
-    document.getElementById('trialBanner').style.display = plan === 'free' ? 'block' : 'none';
-    document.getElementById('chargeNote').innerHTML = plan === 'free'
-      ? '🔒 Your card will be charged <strong>$19.00 today</strong> and monthly after that. Secured by Square. Cancel anytime from the footer.'
-      : '🔒 Your card will be charged <strong>' + amounts[plan] + ' today</strong> and monthly after that. Cancel anytime from the footer. Secured by Square.';
-    document.getElementById('payBtnText').textContent = plan === 'free' ? 'Get Started — $19/mo →' : (plan === 'pro' ? 'Get Pro — $19/mo →' : 'Get Elite — $49/mo →');
-    // Always fully reset form before showing
+    // Reset everything first
     document.getElementById('signupForm').style.display = 'block';
     document.getElementById('successState').style.display = 'none';
     ['fname','femail','fcard','fexpiry','fcvv','fzip'].forEach(function(id) {
@@ -454,8 +428,20 @@
       if (el) { el.value = ''; el.style.borderColor = ''; }
     });
     var btn = document.getElementById('payBtn');
-    btn.disabled = false; btn.style.opacity = '1';
-    document.getElementById('payBtnText').textContent = plan === 'free' ? 'Get Started — $19/mo →' : (plan === 'pro' ? 'Get Pro — $19/mo →' : 'Get Elite — $49/mo →');
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    // Set content based on plan
+    if (plan === 'elite') {
+      document.getElementById('modalTitle').textContent = 'Get FitForge Elite';
+      document.getElementById('modalSub').textContent = 'Everything + dedicated coach · $49/month · Cancel anytime';
+      document.getElementById('payBtnText').textContent = 'Get Elite — $49/mo →';
+      document.getElementById('chargeNote').innerHTML = '🔒 Your card will be charged <strong>$49.00 today</strong> and monthly after that. Secured by Square. Cancel anytime from the footer.';
+    } else {
+      document.getElementById('modalTitle').textContent = 'Get FitForge Pro';
+      document.getElementById('modalSub').textContent = 'Full access · $19/month · Cancel anytime';
+      document.getElementById('payBtnText').textContent = 'Get Started — $19/mo →';
+      document.getElementById('chargeNote').innerHTML = '🔒 Your card will be charged <strong>$19.00 today</strong> and monthly after that. Secured by Square. Cancel anytime from the footer.';
+    }
     document.getElementById('signupOverlay').classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -463,22 +449,6 @@
   function closeSignup() {
     document.getElementById('signupOverlay').classList.remove('active');
     document.body.style.overflow = '';
-    // Reset modal so it can be reopened cleanly
-    setTimeout(() => {
-      document.getElementById('signupForm').style.display = 'block';
-      document.getElementById('successState').style.display = 'none';
-      document.getElementById('fname').value = '';
-      document.getElementById('femail').value = '';
-      document.getElementById('fcard').value = '';
-      document.getElementById('fexpiry').value = '';
-      document.getElementById('fcvv').value = '';
-      document.getElementById('fzip').value = '';
-      document.getElementById('fname').style.borderColor = '';
-      document.getElementById('femail').style.borderColor = '';
-      const btn = document.getElementById('payBtn');
-      btn.disabled = false;
-      btn.style.opacity = '1';
-    }, 300);
   }
 
   document.getElementById('signupOverlay').addEventListener('click', function(e) {
@@ -486,36 +456,35 @@
   });
 
   function formatCard(input) {
-    let v = input.value.replace(/\D/g,'').substring(0,16);
+    var v = input.value.replace(/\D/g,'').substring(0,16);
     input.value = v.replace(/(.{4})/g,'$1 ').trim();
   }
   function formatExpiry(input) {
-    let v = input.value.replace(/\D/g,'').substring(0,4);
+    var v = input.value.replace(/\D/g,'').substring(0,4);
     if (v.length > 2) v = v.substring(0,2) + ' / ' + v.substring(2);
     input.value = v;
   }
 
   function submitPayment() {
-    const name  = document.getElementById('fname').value.trim();
-    const email = document.getElementById('femail').value.trim();
+    var name  = document.getElementById('fname').value.trim();
+    var email = document.getElementById('femail').value.trim();
     document.getElementById('fname').style.borderColor  = name  ? '' : 'rgba(255,80,80,0.5)';
     document.getElementById('femail').style.borderColor = email ? '' : 'rgba(255,80,80,0.5)';
     if (!name || !email) return;
-    const btn = document.getElementById('payBtn');
+    var btn = document.getElementById('payBtn');
     document.getElementById('payBtnText').textContent = 'Processing securely...';
     btn.disabled = true; btn.style.opacity = '0.7';
-    setTimeout(() => {
-      window.open(squareLinks[currentPlan], '_blank');
+    setTimeout(function() {
+      window.open(squareLinks[currentPlan] || squareLinks.pro, '_blank');
       document.getElementById('signupForm').style.display = 'none';
       document.getElementById('successState').style.display = 'block';
-      btn.disabled = false; btn.style.opacity = '1';
     }, 1400);
   }
 
   function toggleFaq(el) {
-    const item = el.parentElement;
-    const open = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    var item = el.parentElement;
+    var open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
     if (!open) item.classList.add('open');
   }
 
@@ -530,7 +499,7 @@
     document.body.style.overflow = '';
   }
   function goToStep(n) {
-    [1,2,3].forEach(i => document.getElementById('cStep'+i).style.display = 'none');
+    [1,2,3].forEach(function(i) { document.getElementById('cStep'+i).style.display = 'none'; });
     document.getElementById('cStep'+n).style.display = 'block';
   }
 </script>
