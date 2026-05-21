@@ -321,8 +321,8 @@
       <p class="modal-sub" id="modalSub">Full access $19 charged today · Then $19/mo · Cancel anytime</p>
 
       <div class="trial-banner" id="trialBanner">
-        <h3>✅ $19 charged today · Cancel anytime</h3>
-        <p>Your card will be charged <strong>$19 today</strong> and $19 every month after that. Cancel anytime from the footer — no questions asked.</p>
+        <h3 id="bannerTitle">✅ $19 charged today · Cancel anytime</h3>
+        <p id="bannerText">Your card will be charged <strong>$19 today</strong> and $19 every month after that. Cancel anytime from the footer — no questions asked.</p>
       </div>
 
       <div class="form-row"><label>Full Name</label><input type="text" id="fname" placeholder="Alex Johnson"></div>
@@ -435,11 +435,15 @@
       document.getElementById('modalTitle').textContent = 'Get FitForge Elite';
       document.getElementById('modalSub').textContent = 'Everything + dedicated coach · $49/month · Cancel anytime';
       document.getElementById('payBtnText').textContent = 'Get Elite — $49/mo →';
+      document.getElementById('bannerTitle').textContent = '✅ $49 charged today · Cancel anytime';
+      document.getElementById('bannerText').innerHTML = 'Your card will be charged <strong>$49 today</strong> and $49 every month after that. Cancel anytime from the footer — no questions asked.';
       document.getElementById('chargeNote').innerHTML = '🔒 Your card will be charged <strong>$49.00 today</strong> and monthly after that. Secured by Square. Cancel anytime from the footer.';
     } else {
       document.getElementById('modalTitle').textContent = 'Get FitForge Pro';
       document.getElementById('modalSub').textContent = 'Full access · $19/month · Cancel anytime';
       document.getElementById('payBtnText').textContent = 'Get Started — $19/mo →';
+      document.getElementById('bannerTitle').textContent = '✅ $19 charged today · Cancel anytime';
+      document.getElementById('bannerText').innerHTML = 'Your card will be charged <strong>$19 today</strong> and $19 every month after that. Cancel anytime from the footer — no questions asked.';
       document.getElementById('chargeNote').innerHTML = '🔒 Your card will be charged <strong>$19.00 today</strong> and monthly after that. Secured by Square. Cancel anytime from the footer.';
     }
     document.getElementById('signupOverlay').classList.add('active');
