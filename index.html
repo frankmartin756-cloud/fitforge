@@ -455,6 +455,22 @@
   function closeSignup() {
     document.getElementById('signupOverlay').classList.remove('active');
     document.body.style.overflow = '';
+    // Reset modal so it can be reopened cleanly
+    setTimeout(() => {
+      document.getElementById('signupForm').style.display = 'block';
+      document.getElementById('successState').style.display = 'none';
+      document.getElementById('fname').value = '';
+      document.getElementById('femail').value = '';
+      document.getElementById('fcard').value = '';
+      document.getElementById('fexpiry').value = '';
+      document.getElementById('fcvv').value = '';
+      document.getElementById('fzip').value = '';
+      document.getElementById('fname').style.borderColor = '';
+      document.getElementById('femail').style.borderColor = '';
+      const btn = document.getElementById('payBtn');
+      btn.disabled = false;
+      btn.style.opacity = '1';
+    }, 300);
   }
 
   document.getElementById('signupOverlay').addEventListener('click', function(e) {
