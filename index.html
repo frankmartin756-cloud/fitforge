@@ -353,11 +353,10 @@
 
     <div class="success-state" id="successState">
       <div class="success-icon">🎉</div>
-      <h3>You're in! Welcome to FitForge.</h3>
-      <p>Your FitForge Pro membership is now active.</p>
-      <p>Check your email for login details.</p>
-      <p style="margin-top:0.75rem; font-size:0.78rem; color:rgba(255,255,255,0.3);">You have been charged $19. Cancel anytime from the footer.</p>
-      <button class="pay-btn" style="margin-top:2rem;" onclick="closeSignup()">Let's Get Started 💪</button>
+      <h3>Payment Successful! Welcome to FitForge.</h3>
+      <p>Your membership is now active. Click below to access your app right now.</p>
+      <a href="https://frankmartin756-cloud.github.io/fitforge-app.html" target="_blank" style="display:block; background:var(--lime); color:var(--dark); font-family:Syne,sans-serif; font-weight:700; font-size:1.1rem; padding:1.1rem; border-radius:100px; text-decoration:none; margin-top:1.5rem; text-align:center;">Access Your FitForge App Now →</a>
+      <p style="margin-top:1rem; font-size:0.78rem; color:rgba(255,255,255,0.3);">Bookmark that link to return anytime. Cancel anytime from the footer below.</p>
     </div>
   </div>
 </div>
@@ -479,9 +478,14 @@
     document.getElementById('payBtnText').textContent = 'Processing securely...';
     btn.disabled = true; btn.style.opacity = '0.7';
     setTimeout(function() {
+      // Open Square payment in new tab
       window.open(squareLinks[currentPlan] || squareLinks.pro, '_blank');
+      // Show success screen with app link
       document.getElementById('signupForm').style.display = 'none';
       document.getElementById('successState').style.display = 'block';
+      // Update app link based on plan
+      var appLink = document.querySelector('#successState a');
+      if (appLink) appLink.href = 'https://frankmartin756-cloud.github.io/fitforge-app.html';
     }, 1400);
   }
 
